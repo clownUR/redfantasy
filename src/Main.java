@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Main {
     static RedFantasy rf = new RedFantasy();
 
@@ -8,7 +10,7 @@ public class Main {
 		while (true) {
 			try {
 				if (rf.getPlayerHp() > 0 && rf.getCpuHp() > 0) {
-					Thread.sleep(3000);
+					Thread.sleep(2000);
 					rf.startPhase();
 				} else if (rf.getPlayerHp() <= 0) {
 					System.out.println("Playerは死んでしまった");
@@ -22,13 +24,28 @@ public class Main {
 			}
 		}
 		System.out.println("Player History:");
-		for (int i = 0; i < rf.getPlayerHistory().length && rf.getPlayerHistory()[i] != -9999; i++) {
-			System.out.print(rf.getPlayerHistory()[i] + "\t");
-		}
+		// for (int i = 0; i < rf.getPlayerHistory().length && rf.getPlayerHistory()[i] != -9999; i++) {
+		// 	System.out.print(rf.getPlayerHistory()[i] + "\t");
+		// }
+
+		int[] playerHistory = rf.getPlayerHistory();
+		Arrays.stream(playerHistory)
+		.filter(value -> value != -9999)
+		.forEach(value -> System.out.print(value + "\t"));
+
+		// IntStream.range(0, rf.getPlayerHistory().length)
+		// .takeWhile(i -> rf.getPlayerHistory()[i] != -9999)
+		// .forEach(i -> System.out.print(rf.getPlayerHistory()[i] + "\t"));
+
+		int [] cpuHistory = rf.getCpuHistory();
 		System.out.println("\nCPU History:");
-		for (int i = 0; i < rf.getCpuHistory().length && rf.getCpuHistory()[i] != -9999; i++) {
-			System.out.print(rf.getCpuHistory()[i] + "\t");
-		}
+		// for (int i = 0; i < rf.getCpuHistory().length && rf.getCpuHistory()[i] != -9999; i++) {
+		// 	System.out.print(rf.getCpuHistory()[i] + "\t");
+		// }
+		Arrays.stream(cpuHistory)
+		.filter(value -> value != -9999)
+		.forEach(value -> System.out.print(value + "\t"));
+
 	}
 
     public static void setMonsters() {
